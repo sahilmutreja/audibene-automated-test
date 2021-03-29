@@ -47,7 +47,9 @@ min**
   7. Stop and remove all the containers after the test execution with following command - <br/>
     `docker-compose -f src/main/resources/docker-compose.yml down`
 
-* Steps to execute tests on local machine
+
+* Additional Feature 😊
+  * You can toggle the environement to execute test on local. 
   * Execute following maven command from project root directory with local profile <br/>
    `mvn clean test -Plocal`
   * This way the test will execute on local and you can access the TestNG report similarly as mentioned earlier.
