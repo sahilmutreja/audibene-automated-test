@@ -29,6 +29,11 @@ min**
   * Both of the test cases are configured to execute in following test suite file
     * [api-test.xml](https://github.com/sahilmutreja/audibene-automated-test/blob/master/src/test/resources/api-test.xml)
 
+* Prerequisites to run the test automation suite
+  1. [JAVA](https://www.java.com/en/download/) version 11.0.4 or above.
+  2. [Apache Maven 3.6.3](https://maven.apache.org/download.cgi?Preferred=ftp://ftp.osuosl.org/pub/apache/)
+  3. [Docker](https://www.docker.com/products/docker-desktop) lastest version.
+
 * Steps to execute tests on docker 
   1. Execute following command from project root directory to spin up docker containers: <br/>
       `docker-compose -f src/main/resources/docker-compose.yml up -d`
