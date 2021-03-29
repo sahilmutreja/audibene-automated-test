@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Audibene Web Test - On Chrome" parallel="tests" thread-count="6">
+    <parameter name="browser" value="chrome"/>
+    <test name="Test login success and login error">
+        <classes>
+            <class name="com.audibene.web.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="Test logout scenario">
+        <classes>
+            <class name="com.audibene.web.LogOutTest"/>
+        </classes>
+    </test>
+
+    <test name="Test if Exit Intent is present">
+        <classes>
+            <class name="com.audibene.web.ExitIntentTest"/>
+        </classes>
+    </test>
+
+    <test name="Test data table can be sorted">
+        <classes>
+            <class name="com.audibene.web.DataTableTest"/>
+        </classes>
+    </test>
+
+    <test name="Test if new window/tab is opened">
+        <classes>
+            <class name="com.audibene.web.WindowTabTest"/>
+        </classes>
+    </test>
+
+    <test name="Test input field dynamic controls">
+        <classes>
+            <class name="com.audibene.web.DynamicControlTest"/>
+        </classes>
+    </test>
+</suite>
