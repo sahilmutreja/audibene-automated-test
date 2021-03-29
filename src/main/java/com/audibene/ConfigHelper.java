@@ -11,7 +11,6 @@ public class ConfigHelper {
   private static final String CONFIG_FILE_NAME = "config.properties";
   public static final String API_BASE_URL = "apiBaseUrl";
   public static final String WEB_BASE_URL = "webBaseUrl";
-  public static final String GRID_URL = "gridUrl";
   public static final String JOKES_PATH = "jokes";
   public static final String CATEGORIES_PATH = "categories";
   public static final String SEARCH_PATH = "search";
@@ -26,9 +25,6 @@ public class ConfigHelper {
     return config.getString(key);
   }
 
-  public static String getGridUrl() {
-    return getConfigValue(GRID_URL);
-  }
   public static String getApiBaseUrl() {
     return getConfigValue(API_BASE_URL);
   }
@@ -64,6 +60,7 @@ public class ConfigHelper {
   public static String getWindowTabPath() {
     return getConfigValue(WINDOW_TAB_PATH);
   }
+
   public static String getDynamicControlPath() {
     return getConfigValue(DYNAMIC_CONTROL_PATH);
   }

@@ -24,6 +24,23 @@
         <maven-surefire-plugin-version>3.0.0-M5</maven-surefire-plugin-version>
         <maven-compiler-plugin-version>3.8.1</maven-compiler-plugin-version>
     </properties>
+    <profiles>
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>remote</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <gridURL>http://localhost:4444/wd/hub</gridURL>
+            </properties>
+        </profile>
+    </profiles>
     <build>
         <plugins>
             <plugin>
@@ -34,6 +51,10 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>src/test/resources/audibene-test.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <systemPropertyVariables>
+                        <profileId>${project.activeProfiles[0].id}</profileId>
+                        <gridUrl>${gridURL}</gridUrl>
+                    </systemPropertyVariables>
                 </configuration>
             </plugin>
         </plugins>
