@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.function.BooleanSupplier;
 import java.util.function.Supplier;
 
@@ -12,27 +13,27 @@ import static com.audibene.ConfigHelper.getWebBaseUrl;
 
 @NoArgsConstructor
 public class BasePage {
-  protected WebDriver driver;
-  protected WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
-  protected BasePage(WebDriver driver) {
-    this.driver = driver;
-    wait = new WebDriverWait(this.driver, 10000, 500);
-  }
+    protected BasePage(WebDriver driver) {
+        this.driver = driver;
+        wait = new WebDriverWait(this.driver, Duration.ofMillis(10000), Duration.ofMillis(500));
+    }
 
-  protected static String getPageUrl(String path) {
-    return getWebBaseUrl().concat(path);
-  }
+    protected static String getPageUrl(String path) {
+        return getWebBaseUrl().concat(path);
+    }
 
-  public void clearAndFill(WebElement element, String text) {
-    element.clear();
-    element.sendKeys(text);
-  }
+    public void clearAndFill(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(text);
+    }
 
-  protected Boolean waitForCondition(
-      BooleanSupplier expectedCondition, Supplier<String> errorMessage) {
-    return (new WebDriverWait(this.driver, 5000, 500))
-        .withMessage(errorMessage)
-        .until((webDriver) -> expectedCondition.getAsBoolean());
-  }
+    protected Boolean waitForCondition(
+            BooleanSupplier expectedCondition, Supplier<String> errorMessage) {
+        return (new WebDriverWait(this.driver, Duration.ofMillis(5000), Duration.ofMillis(500)))
+                .withMessage(errorMessage)
+                .until((webDriver) -> expectedCondition.getAsBoolean());
+    }
 }
