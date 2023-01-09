@@ -14,49 +14,58 @@ import java.net.URL;
 
 public class DriverFactory {
 
-  enum browserType {
-    CHROME {
-      public WebDriver getDriver() {
-        WebDriver webDriver = null;
-        if (System.getProperty("profileId").equals("local")) {
-          WebDriverManager.chromedriver().setup();
-          webDriver = new ChromeDriver();
-        } else {
-          try {
-            ChromeOptions chromeOptions = new ChromeOptions();
-            chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-            webDriver = new RemoteWebDriver(new URL(System.getProperty("gridUrl")), chromeOptions);
-          } catch (MalformedURLException e) {
-            e.printStackTrace();
-          }
-        }
-        return webDriver;
-      }
-    },
-    FIREFOX {
-      public WebDriver getDriver() {
-        WebDriver webDriver = null;
-        if (System.getProperty("profileId").equals("local")) {
-          WebDriverManager.firefoxdriver().setup();
-          webDriver = new FirefoxDriver();
-        } else {
-          try {
-            FirefoxOptions firefoxOptions = new FirefoxOptions();
-            firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-            webDriver =
-                new RemoteWebDriver(new URL(System.getProperty("gridUrl")), new FirefoxOptions());
-          } catch (MalformedURLException e) {
-            e.printStackTrace();
-          }
-        }
-        return webDriver;
-      }
-    };
+    enum browserType {
+        CHROME {
+            public WebDriver getDriver() {
+                WebDriver webDriver = null;
+                if (System.getProperty("profileId", "remote").equals("local")) {
+                    System.out.println("Local Execution");
+                    WebDriverManager.chromedriver().setup();
+                    webDriver = new ChromeDriver();
+                } else {
+                    try {
+                        System.out.println("Remote Execution");
+                        ChromeOptions chromeOptions = new ChromeOptions();
+                        chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+                        String hubHost = System.getProperty("HUB_HOST");
+                        String gridURL = String.format("http://%s:4444/wd/hub", hubHost);
+                        System.out.println("Grid URL for chrome = " + gridURL);
+                        webDriver = new RemoteWebDriver(new URL(gridURL), chromeOptions);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return webDriver;
+            }
+        },
+        FIREFOX {
+            public WebDriver getDriver() {
+                WebDriver webDriver = null;
+                if (System.getProperty("profileId", "remote").equals("local")) {
+                    System.out.println("Local Execution");
+                    WebDriverManager.firefoxdriver().setup();
+                    webDriver = new FirefoxDriver();
+                } else {
+                    try {
+                        System.out.println("Remote Execution");
+                        FirefoxOptions firefoxOptions = new FirefoxOptions();
+                        firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+                        String hubHost = System.getProperty("HUB_HOST");
+                        String gridURL = String.format("http://%s:4444/wd/hub", hubHost);
+                        System.out.println("Grid URL for firefox execution = " + gridURL);
+                        webDriver = new RemoteWebDriver(new URL(gridURL), firefoxOptions);
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return webDriver;
+            }
+        };
 
-    public abstract WebDriver getDriver();
-  }
+        public abstract WebDriver getDriver();
+    }
 
-  public static WebDriver getDriver(String browserName) {
-    return browserType.valueOf(browserName.toUpperCase()).getDriver();
-  }
+    public static WebDriver getDriver(String browserName) {
+        return browserType.valueOf(browserName.toUpperCase()).getDriver();
+    }
 }
