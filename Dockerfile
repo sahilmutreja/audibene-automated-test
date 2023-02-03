@@ -1,13 +1,16 @@
 FROM openjdk:8u212-jre-alpine3.9
 
+# Add utilities to the container which will be used in the healthcheck shell script
 RUN apk add curl jq
 
-# Working Directory
+# Set the Working Directory
 WORKDIR /usr/share/audibene-test
 
 # COPY JAR Files to the container
 ADD target/audibene-test-1.0.jar audibene-test-1.0.jar
 ADD target/audibene-test-1.0-tests.jar audibene-test-1.0-tests.jar
+
+# COPY Dependencies to the container including any other resouce file like .csv .json or .xls
 ADD target/libs libs
 
 # Copy test suite files to the container
