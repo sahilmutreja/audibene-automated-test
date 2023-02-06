@@ -11,7 +11,7 @@ pipeline {
     stage('Build Image') {
       agent any
       steps {
-        sh 'docker build -t=\'sahilmutreja/audibene-test\' .'
+        sh 'docker build -t=\'sahilmutreja audibene-test\' .'
       }
     }
 
