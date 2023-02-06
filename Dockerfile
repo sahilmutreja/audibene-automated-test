@@ -6,7 +6,7 @@ RUN apk add curl jq
 # Set the Working Directory
 WORKDIR /usr/share/audibene-test
 
-# COPY JAR Files to the container
+# COPY JAR Files & Dependencies in /libs folder to the container
 ADD target/audibene-test-1.0.jar audibene-test-1.0.jar
 ADD target/audibene-test-1.0-tests.jar audibene-test-1.0-tests.jar
 
