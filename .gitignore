@@ -4,6 +4,7 @@ log/
 
 ## Directory-based project format:
 .idea/
+test-result/
 
 # User-specific stuff:
 .classpath

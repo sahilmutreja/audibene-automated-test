@@ -25,7 +25,7 @@ services:
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
 
   audibene-test:
-    image: sahilmutreja/audibene-test
+    image: sahilmutreja/audibene-test:linux-amd64
     depends_on:
       - chrome
       - firefox
